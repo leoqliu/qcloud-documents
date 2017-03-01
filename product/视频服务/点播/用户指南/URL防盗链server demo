@@ -1,7 +1,9 @@
 <?php
-
+//待加防盗链的url
 $origurl="http://200001791.vod.myqcloud.com/200001791_79690ab8cbfb11e6abf34b273b7e30d4.f220.av.m3u8";
 
+
+//从url中解析host path file，
 $b=strpos($origurl,"http://");
 
 if ($b==0) {
@@ -25,7 +27,7 @@ if ($b-$pb-1>0){
 }
 //echo $host . "\n". $file."\n".$path."\n";
 
-
+//计算sig
 $tm=dechex(strtotime("+2 hours")); //expire time 2 hours
 
 $key="f4f2677a252717de91a03f0470a4e46c";
@@ -35,6 +37,8 @@ $us="douyu";
 $sigstr=$path.$tm.$key.$random.$us;
 $sig=md5($sigstr);
 //echo $sigstr . "\n";
+
+//生成最终防盗链url
 $url=$origurl."?txTime=".$tm."&random=".$random."&us=".$us."&txSign=".$sig;
 
 echo $url . "\n";
